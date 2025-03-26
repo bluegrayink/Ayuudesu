@@ -41,18 +41,18 @@
      <script>
     document.addEventListener('DOMContentLoaded', () => {
         const referrer = document.referrer; 
-        const allowedReferrers = ["indexayudesu.html", "adminayudesu.html"];
+        const allowedReferrers = ["index.html", "admin.html"];
 
         const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
         if (!isAllowedReferrer || !localStorage.getItem("isLoggedIn")) {
-            window.location.href = "indexayudesu.html"; 
+            window.location.href = "index.html"; 
         }
 
         const redirectTimeout = 1800000;
 
         setTimeout(() => {
             alert("Session expired. Redirecting to homepage...");
-            window.location.href = "indexayudeesu.html";
+            window.location.href = "index.html";
         }, redirectTimeout);
 
         document.addEventListener('contextmenu', (e) => {
@@ -87,7 +87,7 @@
         document.getElementById("logoutButton").addEventListener("click", () => {
             sessionStorage.removeItem("accessGranted");
             localStorage.removeItem("isLoggedIn");
-            window.location.href = "indexayudesu.html";
+            window.location.href = "index.html";
         });
     });
 </script>
@@ -105,21 +105,21 @@
         <!-- Photo gallery -->
         <div class="photo-gallery">
             <h1>Sparkle</h1>
-            <img src="/testnfc/Photo/Ayudesu/1.JPG" alt="Ayudesu" class="protected-img">
-            <img src="/testnfc/Photo/Ayudesu/2.JPG" alt="Ayudesu" class="protected-img">
-            <img src="/testnfc/Photo/Ayudesu/3.JPG" alt="Ayudesu" class="protected-img">
-            <img src="/testnfc/Photo/Ayudesu/4.JPG" alt="Ayudesu" class="protected-img">
-            <img src="/testnfc/Photo/Ayudesu/5.JPG" alt="Ayudesu" class="protected-img">
-            <img src="/testnfc/Photo/Ayudesu/6.JPG" alt="Ayudesu" class="protected-img">
-            <img src="/testnfc/Photo/Ayudesu/7.JPG" alt="Ayudesu" class="protected-img">
-            <img src="/testnfc/Photo/Ayudesu/8.JPG" alt="Ayudesu" class="protected-img">
+            <img src="/testnfc/Photo/Sparkle/1.JPG" alt="Ayuudesu Sparkle" class="protected-img">
+            <img src="/testnfc/Photo/Sparkle/2.JPG" alt="Ayuudesu Sparkle" class="protected-img">
+            <img src="/testnfc/Photo/Sparkle/3.JPG" alt="Ayuudesu Sparkle" class="protected-img">
+            <img src="/testnfc/Photo/Sparkle/4.JPG" alt="Ayuudesu Sparkle" class="protected-img">
+            <img src="/testnfc/Photo/Sparkle/5.JPG" alt="Ayuudesu Sparkle" class="protected-img">
+            <img src="/testnfc/Photo/Sparkle/6.JPG" alt="Ayuudesu Sparkle" class="protected-img">
+            <img src="/testnfc/Photo/Sparkle/7.JPG" alt="Ayuudesu Sparkle" class="protected-img">
+            <img src="/testnfc/Photo/Sparkle/8.JPG" alt="Ayuudesu Sparkle" class="protected-img">
         </div>
 
         <!-- Video gallery -->
         <div class="video-gallery hidden">
             <h1>Video 01</h1> 
             <video controls class="protected-video" controlsList="nodownload">
-                <source src="/testnfc/Video/Ayudesu/vid01.mp4" type="video/mp4">
+                <source src="/testnfc/Video/vid01.mp4" type="video/mp4">
             </video>
         </div>
 
@@ -127,7 +127,7 @@
         <div class="audio-gallery hidden">
             <h1>Pelem... Pelempuan</h1> 
             <audio controls style="width: 300px; align: center;">
-                <source src="/testnfc/Audio/Ayudesu/Pelempuan.mp3" type="audio/mpeg">
+                <source src="/testnfc/Audio/Pelempuan.mp3" type="audio/mpeg">
             </audio>
         </div>
     </div>
