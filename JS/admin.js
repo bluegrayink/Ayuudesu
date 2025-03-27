@@ -1,8 +1,5 @@
 // UID map
-const uidToPageMap = {
-    "sparkle.html": ["44E1FE92","74A80793"], 
-    "calendarevent.html": ["44E1FE92","74A80793"]
-};
+const validUIDs = ["44E1FE92","74A80793"];
 
 // Elements
 const androidButton = document.getElementById("androidButton");
