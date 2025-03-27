@@ -1,5 +1,5 @@
 // UID map
-const validUIDs = ["04870593"];
+const validUIDs = ["044527A0672681"];
 
 // Elements
 const androidButton = document.getElementById("androidButton");
