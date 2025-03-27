@@ -4,8 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kai Liaa Web NFC</title>
+    <title>Ayuudesu Admin Page</title>
     <link rel="stylesheet" href="../ayuudesu/Styles/main.css">
+<style>
+        #buttonContainer { display: none; }
+        #uidInputContainer { display: none; }
+    </style>
     <script>
         // Prevent viewing source code using Ctrl+U
         document.addEventListener('keydown', (e) => {
@@ -30,16 +34,26 @@
     </script>
 </head>
 <body style="background-color: #ffd0d7;">
-    <h1>Admin Ayudesu Page</h1>
-    <!-- Buttons with data-target attributes -->
-    <button id="sparkleButton" data-target="ayudesu-sparkle.html">Sparkle</button>
-    <button id="calendarButton" data-target="eventayudesu.html">Calendar</button>
+    <h1>Ayuudesu Admin Page</h1>
+
+<button id="androidButton">Android</button>
+    <button id="iosButton">iOS</button>
+
+    <div id="uidInputContainer">
+        <input type="text" id="uidInput" placeholder="Enter UID">
+        <button id="submitUID">Submit</button>
+    </div>
+    
+    <div id="buttonContainer">
+        <button id="sparkleButton">Sparkle</button>
+        <button id="calendarButton">Calendar</button>
+    </div>
 
     <!-- Status and logs for user interaction -->
     <div id="status"></div>
     <div id="log"></div>
 
     <!-- Load JavaScript application logic -->
-    <script src="../ayuudesu/JS/appsadmin.js"></script>
+    <script src="../ayuudesu/JS/admin.js"></script>
 </body>
 </html>
