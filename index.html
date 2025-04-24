@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ayuudesu web NFC</title>
-    <link rel="stylesheet" href="../Ayuudesu/Styles/main.css">
-    <script>
+    <meta content="AYUUDESU" name="keywords">
+    <meta content="ALL ABOUT AYUUDESU" name="description">
+
+    <link rel="stylesheet" href="Styles/main.css">
+   <script>
         // Prevent viewing source code using Ctrl+U
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'u') {
@@ -32,38 +35,47 @@
 <body style="background-color: #ffd0d7;">
     <h1>Ayuudesu Page</h1>
     <div class="photo-gallery">
-        <img src="/Ayuudesu/Photo/indexayu.JPG" alt="index Ayudesu" class="protected-img">
-        <h2>Hello! I am Ayuudesu and I am a full time cosplayer, content creator and gamers. Thank you for your support!</h2>
+        <img src="Photo/indexayu.JPG" alt="index Jet" class="protected-img">
+        <h2>Hello! I am Ayuudesu and I am a full-time cosplayer, content creator, and gamer. Thank you for your support!</h2>
     </div>
+
     <div class="business-collab">
-        <h2>For business and collaboration
+        <h2>For business and collaboration</h2>
         <div class="email-section">
             <a href="https://wa.me/62859106937339" target="_blank">
-            <img src="/Ayuudesu/Photo/icon/whatsapp-gray-icon.png" alt="wa" class="protected-img">
+            <img src="Photo/icon/whatsapp-gray-icon.png" alt="wa" class="protected-img">
             </a>
-                <span>0859-1069-37339 (Holly)</span></h2>
+                <span>0859-1069-37339 (Holly)</span>
+        </div>
     </div>
-    <div class="social-icons">
+
+     <div class="social-icons">
         <a href="https://www.instagram.com/ayuudesu/" target="_blank">
-            <img src="/Ayuudesu/Photo/icon/instagram-gray-icon.png" alt="instagram" class="protected-img" style="width:32px;height:32px;">
+            <img src="Photo/icon/instagram-gray-icon.png" alt="instagram" class="protected-img" style="width:32px;height:32px;">
         </a>
         <a href="https://www.tiktok.com/@ayuudesuu" target="_blank">
-            <img src="/Ayuudesu/Photo/icon/tiktok-gray-icon.png" alt="tiktok" class="protected-img" style="width:32px;height:32px;">
+            <img src="Photo/icon/tiktok-gray-icon.png" alt="tiktok" class="protected-img" style="width:32px;height:32px;">
         </a>
         <a href="https://youtube.com/@ayuudesuu" target="_blank">
-            <img src="/Ayuudesu/Photo/icon/youtube-app-gray-icon.png" alt="youtube" class="protected-img" style="width:32px;height:32px;">
+            <img src="Photo/icon/youtube-app-gray-icon.png" alt="youtube" class="protected-img" style="width:32px;height:32px;">
         </a>
         <a href="https://discord.gg/4pv5BzZu75" target="_blank">
-            <img src="/Ayuudesu/Photo/icon/discord-gray-icon.png" alt="discord" class="protected-img" style="width:32px;height:32px;">
+            <img src="Photo/icon/discord-gray-icon.png" alt="discord" class="protected-img" style="width:32px;height:32px;">
         </a>
         <a href="https://www.facebook.com/profile.php?id=100090355335831&mibextid=LQQJ4d" target="_blank">
-            <img src="/Ayuudesu/Photo/icon/facebook-app-round-gray-icon.png" alt="facebook" class="protected-img" style="width:32px;height:32px;">
+            <img src="Photo/icon/facebook-app-round-gray-icon.png" alt="facebook" class="protected-img" style="width:32px;height:32px;">
         </a>
     </div>
-     <button id="scanButton"><b>Android</b></button>
-     <button id="iphoneButton"><b>iOS</b></button>
+    <h2>--- Find More! ---</h2>
+    <button id="scanButton"><b>Android</b></button>
+    <button id="iphoneButton"><b>iOS</b></button>
 
-    <!-- iPhone-specific input section -->
+     <!-- Android Section -->
+    <div id="androidSection" style="display: none; margin-top: 20px;">
+        <h2>Tap your NFC card to scan</h2>
+    </div>
+    
+    <!-- iPhone Section -->
     <div id="iphoneSection" style="display: none; margin-top: 20px;">
         <h2>Scan the QR code in the card for check the UID</h2>
         <label for="uidInput">Enter UID:</label>
@@ -73,6 +85,6 @@
 
     <div id="status"></div>
     <div id="log"></div>
-    <script src="../Ayuudesu/JS/apps.js"></script>
+    <script src="JS/apps.js"></script>
 </body>
 </html>
