@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Ayudesu - Sparkle</title>
-    <link rel="stylesheet" href="../Ayuudesu/Styles/main.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-        .hidden {
-            display: none;
-        }
+  <title>Jetsukii</title>
+  <link rel="stylesheet" href="Styles/main.css">
 
-         .container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        div.animated {
-            position: absolute;
-            visibility: hidden;
-            animation-name: fadeIn;
-            animation-duration: 1s;
-            animation-fill-mode: forwards;
-        }
+  <style>
+  .hidden {
+    display: none;
+  }
 
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(0);}
-            to {opacity: 1; transform: translateY(20px); visibility: visible;}
-        }
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
 
-        img, video {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-     <script>
+  div.animated {
+    position: absolute;
+    visibility: hidden;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(20px);
+      visibility: visible;
+    }
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
+
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const referrer = document.referrer; 
+      const referrer = document.referrer; 
         const allowedReferrers = ["index.html", "admin.html"];
 
         const isAllowedReferrer = allowedReferrers.some(page => referrer.includes(page));
@@ -61,64 +71,67 @@
             }
         });
 
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('dragstart', event => event.preventDefault());
+      const galleries = {
+        'photo-gallery': document.querySelector('.photo-gallery'),
+        'video-gallery': document.querySelector('.video-gallery'),
+        'audio-gallery': document.querySelector('.audio-gallery')
+      };
+
+      const showContent = (contentType) => {
+        Object.values(galleries).forEach(gallery => {
+          gallery.classList.add('hidden');
         });
+        const galleryToShow = galleries[contentType];
+        if (galleryToShow) {
+          galleryToShow.classList.remove('hidden');
+          galleryToShow.classList.add('animated');
+        }
+      };
 
-        const galleries = {
-            'photo-gallery': document.querySelector('.photo-gallery'),
-            'video-gallery': document.querySelector('.video-gallery'),
-            'audio-gallery': document.querySelector('.audio-gallery')
-        };
+      document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
+      document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
+      document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
 
-        const showContent = (contentType) => {
-            Object.values(galleries).forEach(gallery => gallery.classList.add('hidden'));
-            const galleryToShow = galleries[contentType];
-            if (galleryToShow) {
-                galleryToShow.classList.remove('hidden');
-                galleryToShow.classList.add('animated');
-            }
-        };
+      document.getElementById("logoutButton")?.addEventListener("click", () => {
+        sessionStorage.removeItem("accessGranted");
+        localStorage.removeItem("isLoggedIn");
+        window.location.href = "index.html";
+      });
 
-        document.getElementById("photoButton").addEventListener("click", () => showContent('photo-gallery'));
-        document.getElementById("videoButton").addEventListener("click", () => showContent('video-gallery'));
-        document.getElementById("audioButton").addEventListener("click", () => showContent('audio-gallery'));
-
-        document.getElementById("logoutButton").addEventListener("click", () => {
-            sessionStorage.removeItem("accessGranted");
-            localStorage.removeItem("isLoggedIn");
-            window.location.href = "index.html";
-        });
     });
-</script>
+  </script>
 </head>
 
 <body style="background-color: #ffd0d7;">
-    <h1>Sparkle</h1>
-    <div>
-        <button id="photoButton"><b>Photo</b></button>
-        <button id="videoButton"><b>Video</b></button>
-        <button id="audioButton"><b>Audio</b></button>
+  <div style="display: flex; justify-content: center; align-items: center; padding: 5px;">
+    <a href="index.html" style="text-decoration: none; font-size: 20px;"><img src="Photo/icon/home-gray-icon.png" 
+
+alt="home" class="protected-img" style="width:32px;height:32px;">
+
+</a>
+  </div>
+  <h1>Zeta</h1>
+  <div>
+    <button id="photoButton">Photo</button>
+    <button id="videoButton">Video</button>
+    <button id="audioButton">Audio</button>
+  </div>
+
+  <div class="container">
+    <!-- Photo gallery -->
+    <div class="photo-gallery">
+      <div class="slideshow-container">
+	<i id="prevBtn"><img src="Photo/icon/angle-left-gray-icon.png"></i>
+        <img id="slideshow-img" src="Photo/Sparkle/1.JPG" alt="Kleejet" class="protected-img">
+	<i id="nextBtn"><img src="Photo/icon/angle-right-gray-icon.png"></i>
+      </div>
     </div>
 
-    <div class="container">
-        <!-- Photo gallery -->
-        <div class="photo-gallery">
-            <img src="/Ayuudesu/Photo/Sparkle/1.JPG" alt="Ayuudesu Sparkle" class="protected-img">
-            <img src="/Ayuudesu/Photo/Sparkle/2.JPG" alt="Ayuudesu Sparkle" class="protected-img">
-            <img src="/Ayuudesu/Photo/Sparkle/3.JPG" alt="Ayuudesu Sparkle" class="protected-img">
-            <img src="/Ayuudesu/Photo/Sparkle/4.JPG" alt="Ayuudesu Sparkle" class="protected-img">
-            <img src="/Ayuudesu/Photo/Sparkle/5.JPG" alt="Ayuudesu Sparkle" class="protected-img">
-            <img src="/Ayuudesu/Photo/Sparkle/6.JPG" alt="Ayuudesu Sparkle" class="protected-img">
-            <img src="/Ayuudesu/Photo/Sparkle/7.JPG" alt="Ayuudesu Sparkle" class="protected-img">
-            <img src="/Ayuudesu/Photo/Sparkle/8.JPG" alt="Ayuudesu Sparkle" class="protected-img">
-        </div>
-
-        <!-- Video gallery -->
+    <!-- Video gallery -->
         <div class="video-gallery hidden">
             <h1>Video 01</h1> 
             <video controls class="protected-video" controlsList="nodownload">
-                <source src="/Ayuudesu/Video/vid01.mp4" type="video/mp4">
+                <source src="Video/vid01.mp4" type="video/mp4">
             </video>
         </div>
 
@@ -126,9 +139,83 @@
         <div class="audio-gallery hidden">
             <h1>Pelem... Pelempuan</h1> 
             <audio controls style="width: 300px; align: center;">
-                <source src="/Ayuudesu/Audio/Pelempuan.mp3" type="audio/mpeg">
+                <source src="Audio/Pelempuan.mp3" type="audio/mpeg">
             </audio>
         </div>
-    </div>
+  </div>
+
+ <!-- Popup Image Viewer -->
+<div id="popupViewer" class="slideshow-popup hidden">
+  <span id="closePopup" class="close-btn">&times;</span>
+  <img id="popupImg" src="" alt="Popup Image">
+</div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const imagePaths = [
+      "Photo/Sparkle/1.JPG", "Photo/Sparkle/2.JPG", "Photo/Sparkle/3.JPG", "Photo/Sparkle/4.JPG",
+      "Photo/Sparkle/5.JPG", "Photo/Sparkle/6.JPG", "Photo/Sparkle/7.JPG", "Photo/Sparkle/8.JPG"
+    ];
+
+    let currentSlide = 0;
+    const slideshowImg = document.getElementById('slideshow-img');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    if (slideshowImg && prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + imagePaths.length) % imagePaths.length;
+        slideshowImg.src = imagePaths[currentSlide];
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % imagePaths.length;
+        slideshowImg.src = imagePaths[currentSlide];
+      });
+    } else {
+      console.error("Elemen slideshow tidak ditemukan.");
+    }
+
+    // Popup image logic
+    const popup = document.getElementById('popupViewer');
+    const popupImg = document.getElementById('popupImg');
+    const closePopup = document.getElementById('closePopup');
+
+    // Buka popup saat slideshow image diklik
+    slideshowImg.addEventListener('click', () => {
+      popupImg.src = imagePaths[currentSlide];
+      popup.classList.remove('hidden');
+    });
+
+    // Tutup popup saat klik tombol close
+    if (closePopup) {
+      closePopup.addEventListener('click', () => {
+        popup.classList.add('hidden');
+        popupImg.src = "";
+      });
+    }
+
+    // Tutup popup saat klik luar area gambar
+    popup.addEventListener('click', (e) => {
+      if (e.target.id === 'popupViewer') {
+        popup.classList.add('hidden');
+        popupImg.src = "";
+      }
+    });
+
+slideshowImg.addEventListener('click', () => {
+  console.log("Popup dibuka");
+  popupImg.src = imagePaths[currentSlide];
+  popup.classList.remove('hidden');
+});
+
+    // Disable drag pada semua gambar
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('dragstart', event => event.preventDefault());
+    });
+  });
+</script>
+
+
 </body>
 </html>
