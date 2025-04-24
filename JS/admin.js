@@ -1,5 +1,5 @@
 // UID map
-const validUIDs = ["44E1FE92","74A80793","JETT00ACC"];
+const validUIDs = ["56B76B1A","AYU00ACC"];
 
 // Elements
 const androidButton = document.getElementById("androidButton");
@@ -8,8 +8,7 @@ const uidInputContainer = document.getElementById("uidInputContainer");
 const uidInput = document.getElementById("uidInput");
 const submitUID = document.getElementById("submitUID");
 const buttonContainer = document.getElementById("buttonContainer");
-const kleeButton = document.getElementById("kleeButton");
-const zetaButton = document.getElementById("zetaButton");
+const sparkleButton = document.getElementById("sparkleButton");
 const calendarButton = document.getElementById("calendarButton");
 const statusDiv = document.getElementById("status");
 
@@ -69,6 +68,5 @@ iosButton.addEventListener("click", () => {
 submitUID.addEventListener("click", () => validateUID(uidInput.value));
 
 // Event listeners for direct page navigation
-kleeButton.addEventListener("click", () => window.location.href = "klee.html");
-zetaButton.addEventListener("click", () => window.location.href = "zeta.html");
+sparkleButton.addEventListener("click", () => window.location.href = "sparkle.html");
 calendarButton.addEventListener("click", () => window.location.href = "calendar.html");
