@@ -11,36 +11,20 @@ const monthNames = [
 ];
 
 const events = {
-    '2025-01-18': [
+    '2025-05-24': [
         {
-            date: '18-19 Januari',
-            name: 'Event 01',
-            location: 'Location',
+            date: '24-25 Mei',
+            name: 'Comifuro XX (CFXX)',
+            location: 'ICE BSD',
             description: 'info'
         }
     ],
-    '2025-01-19': [
+    '2025-05-25': [
         {
-            date: '18-19 Januari',
-            name: 'Event 01',
-            location: 'Location',
+            date: '24-25 Mei',
+            name: 'Comifuro XX (CFXX)',
+            location: 'ICE BSD',
             description: 'info'
-        }
-    ],
-    '2025-02-08': [
-        {
-            date: '08-09 Februari',
-            name: 'Mukashi',
-            location: 'SPARK',
-            description: 'No Booth'
-        }
-    ],
-    '2025-02-09': [
-        {
-            date: '08-09 Februari',
-            name: 'Mukashi',
-            location: 'SPARK',
-            description: 'No Booth'
         }
     ],
     '2025-04-26': [
