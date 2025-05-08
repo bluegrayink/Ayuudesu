@@ -16,7 +16,8 @@ const events = {
             date: '24-25 Mei',
             name: 'Comifuro XX (CFXX)',
             location: 'ICE BSD Hall 6-10',
-            description: 'Collab with FanMate'
+            description: 'Collab with FanMate',
+            info: 'https://www.instagram.com/p/DJWLa_vBKx3/?img_index=2'
         }
     ],
     '2025-05-25': [
@@ -24,7 +25,8 @@ const events = {
             date: '24-25 Mei',
             name: 'Comifuro XX (CFXX)',
             location: 'ICE BSD Hall 6-10',
-            description: 'Collab with FanMate'
+            description: 'Collab with FanMate',
+            info: 'https://www.instagram.com/p/DJWLa_vBKx3/?img_index=2'
         }
     ],
     '2025-04-26': [
