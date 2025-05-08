@@ -31,16 +31,16 @@ const events = {
     ],
     '2025-04-26': [
         {
-            date: '26-27 April',
             name: 'Indonesia Anime Conference (Inacon)',
+            date: '26-27 April',
             location: 'Indonesia',
             description: 'TBA'
         }
     ],
     '2025-04-27': [
         {
-            date: '26-27 April',
             name: 'Indonesia Anime Conference (Inacon)',
+            date: '26-27 April',
             location: 'Indonesia',
             description: 'TBA'
         }
@@ -122,7 +122,7 @@ function displayEventDetails(date) {
             // Tambahkan elemen untuk setiap bagian (date, name, location, info)
             const eventName = document.createElement('div');
             eventName.textContent = event.name;
-            eventDate.style.fontWeight = 'bold';
+            eventName.style.fontWeight = 'bold';
 
             const eventDate = document.createElement('div');
             eventDate.textContent = event.date;
@@ -140,8 +140,8 @@ function displayEventDetails(date) {
             eventInfo.style.color = 'blue'; // Gaya opsional
 
             // Gabungkan semua elemen ke dalam event block
-            eventBlock.appendChild(eventDate);
             eventBlock.appendChild(eventName);
+            eventBlock.appendChild(eventDate);
             eventBlock.appendChild(eventLocation);
             eventBlock.appendChild(eventDescription);
             eventBlock.appendChild(eventInfo);
