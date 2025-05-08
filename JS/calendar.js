@@ -13,18 +13,20 @@ const monthNames = [
 const events = {
     '2025-05-24': [
         {
-            date: '24-25 Mei',
             name: 'Comifuro XX (CFXX)',
+            date: '24-25 Mei',
             location: 'ICE BSD',
-            description: 'Collab with FanMate'
+            description: 'Collab with FanMate',
+            info: 'https://www.instagram.com/p/DJWLa_vBKx3/?img_index=2'
         }
     ],
     '2025-05-25': [
         {
-            date: '24-25 Mei',
             name: 'Comifuro XX (CFXX)',
+            date: '24-25 Mei',
             location: 'ICE BSD',
-            description: 'Collab with FanMate'
+            description: 'Collab with FanMate',
+            info: 'https://www.instagram.com/p/DJWLa_vBKx3/?img_index=2'
         }
     ],
     '2025-04-26': [
@@ -118,12 +120,12 @@ function displayEventDetails(date) {
             eventBlock.classList.add('event-block');
 
             // Tambahkan elemen untuk setiap bagian (date, name, location, info)
-            const eventDate = document.createElement('div');
-            eventDate.textContent = event.date;
-            eventDate.style.fontWeight = 'bold';
-
             const eventName = document.createElement('div');
             eventName.textContent = event.name;
+            eventDate.style.fontWeight = 'bold';
+
+            const eventDate = document.createElement('div');
+            eventDate.textContent = event.date;
 
             const eventLocation = document.createElement('div');
             eventLocation.textContent = event.location;
