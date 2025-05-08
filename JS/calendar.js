@@ -120,12 +120,13 @@ function displayEventDetails(date) {
             eventBlock.classList.add('event-block');
 
             // Tambahkan elemen untuk setiap bagian (date, name, location, info)
+            const eventDate = document.createElement('div');
+            eventDate.textContent = event.date;
+            eventDate.style.fontWeight = 'bold';
+
             const eventName = document.createElement('div');
             eventName.textContent = event.name;
             eventName.style.fontWeight = 'bold';
-
-            const eventDate = document.createElement('div');
-            eventDate.textContent = event.date;
 
             const eventLocation = document.createElement('div');
             eventLocation.textContent = event.location;
@@ -140,8 +141,8 @@ function displayEventDetails(date) {
             eventInfo.style.color = 'blue'; // Gaya opsional
 
             // Gabungkan semua elemen ke dalam event block
-            eventBlock.appendChild(eventName);
             eventBlock.appendChild(eventDate);
+            eventBlock.appendChild(eventName);
             eventBlock.appendChild(eventLocation);
             eventBlock.appendChild(eventDescription);
             eventBlock.appendChild(eventInfo);
