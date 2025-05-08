@@ -13,34 +13,32 @@ const monthNames = [
 const events = {
     '2025-05-24': [
         {
-            name: 'Comifuro XX (CFXX)',
             date: '24-25 Mei',
-            location: 'ICE BSD',
-            description: 'Collab with FanMate',
-            info: 'https://www.instagram.com/p/DJWLa_vBKx3/?img_index=2'
+            name: 'Comifuro XX (CFXX)',
+            location: 'ICE BSD Hall 6-10',
+            description: 'Collab with FanMate'
         }
     ],
     '2025-05-25': [
         {
-            name: 'Comifuro XX (CFXX)',
             date: '24-25 Mei',
-            location: 'ICE BSD',
-            description: 'Collab with FanMate',
-            info: 'https://www.instagram.com/p/DJWLa_vBKx3/?img_index=2'
+            name: 'Comifuro XX (CFXX)',
+            location: 'ICE BSD Hall 6-10',
+            description: 'Collab with FanMate'
         }
     ],
     '2025-04-26': [
         {
-            name: 'Indonesia Anime Conference (Inacon)',
             date: '26-27 April',
+            name: 'Indonesia Anime Conference (Inacon)',
             location: 'Indonesia',
             description: 'TBA'
         }
     ],
     '2025-04-27': [
         {
-            name: 'Indonesia Anime Conference (Inacon)',
             date: '26-27 April',
+            name: 'Indonesia Anime Conference (Inacon)',
             location: 'Indonesia',
             description: 'TBA'
         }
@@ -120,14 +118,13 @@ function displayEventDetails(date) {
             eventBlock.classList.add('event-block');
 
             // Tambahkan elemen untuk setiap bagian (date, name, location, info)
-            const eventDate = document.createElement('div');
-            eventDate.textContent = event.date;
-            eventDate.style.fontWeight = 'bold';
-
             const eventName = document.createElement('div');
             eventName.textContent = event.name;
             eventName.style.fontWeight = 'bold';
-
+            
+            const eventDate = document.createElement('div');
+            eventDate.textContent = event.date;
+            
             const eventLocation = document.createElement('div');
             eventLocation.textContent = event.location;
 
@@ -141,8 +138,8 @@ function displayEventDetails(date) {
             eventInfo.style.color = 'blue'; // Gaya opsional
 
             // Gabungkan semua elemen ke dalam event block
-            eventBlock.appendChild(eventDate);
             eventBlock.appendChild(eventName);
+            eventBlock.appendChild(eventDate);
             eventBlock.appendChild(eventLocation);
             eventBlock.appendChild(eventDescription);
             eventBlock.appendChild(eventInfo);
