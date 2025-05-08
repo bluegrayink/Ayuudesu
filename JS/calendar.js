@@ -16,7 +16,7 @@ const events = {
             date: '24-25 Mei',
             name: 'Comifuro XX (CFXX)',
             location: 'ICE BSD',
-            description: 'info'
+            description: 'Collab with FanMate'
         }
     ],
     '2025-05-25': [
@@ -24,7 +24,7 @@ const events = {
             date: '24-25 Mei',
             name: 'Comifuro XX (CFXX)',
             location: 'ICE BSD',
-            description: 'info'
+            description: 'Collab with FanMate'
         }
     ],
     '2025-04-26': [
@@ -32,7 +32,7 @@ const events = {
             date: '26-27 April',
             name: 'Indonesia Anime Conference (Inacon)',
             location: 'Indonesia',
-            description: '26-27 Apr'
+            description: 'TBA'
         }
     ],
     '2025-04-27': [
@@ -40,7 +40,7 @@ const events = {
             date: '26-27 April',
             name: 'Indonesia Anime Conference (Inacon)',
             location: 'Indonesia',
-            description: '26-27 Apr'
+            description: 'TBA'
         }
     ]
 };
