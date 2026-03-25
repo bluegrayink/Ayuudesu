@@ -3,148 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Gallery</title>
+<title>Admin Gallery - Multi Category</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: 'Inter', sans-serif; background: #fff0f5; min-height: 100vh; color: #1a1a1a; }
 
   /* LOGIN */
-  #login {
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  }
-  .login-card {
-    background: #fff; border-radius: 16px; padding: 40px 36px; width: 320px;
-    box-shadow: 0 4px 24px rgba(220,80,120,0.10);
-    border: 1px solid #fcd0dd;
-  }
+  #login { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .login-card { background: #fff; border-radius: 16px; padding: 40px 36px; width: 320px; box-shadow: 0 4px 24px rgba(220,80,120,0.10); border: 1px solid #fcd0dd; }
   .login-logo { font-size: 28px; margin-bottom: 4px; }
   .login-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; }
   .login-sub { font-size: 13px; color: #999; margin-bottom: 24px; }
-  .inp {
-    width: 100%; border: 1.5px solid #fcd0dd; border-radius: 10px; padding: 11px 14px;
-    font-size: 14px; font-family: inherit; outline: none; background: #fff8fa;
-    transition: border-color 0.2s; color: #1a1a1a;
-  }
+  .inp { width: 100%; border: 1.5px solid #fcd0dd; border-radius: 10px; padding: 11px 14px; font-size: 14px; font-family: inherit; outline: none; background: #fff8fa; transition: border-color 0.2s; color: #1a1a1a; }
   .inp:focus { border-color: #e8507a; }
-  .btn-pink {
-    width: 100%; background: #e8507a; color: #fff; border: none; border-radius: 10px;
-    padding: 12px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 12px;
-    transition: background 0.2s;
-  }
+  .btn-pink { width: 100%; background: #e8507a; color: #fff; border: none; border-radius: 10px; padding: 12px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 12px; transition: background 0.2s; }
   .btn-pink:hover { background: #d63f6a; }
   .err { font-size: 12px; color: #e8507a; margin-top: 8px; display: none; }
 
   /* APP */
   #app { display: none; }
-  .header {
-    background: #fff; border-bottom: 1px solid #fcd0dd; padding: 0 24px;
-    height: 56px; display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 10;
-  }
+  .header { background: #fff; border-bottom: 1px solid #fcd0dd; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
   .header-brand { font-size: 15px; font-weight: 600; color: #e8507a; display: flex; align-items: center; gap: 8px; }
   .header-brand span { font-size: 18px; }
   .btn-out { background: none; border: 1.5px solid #fcd0dd; border-radius: 8px; padding: 5px 14px; font-size: 12px; color: #999; cursor: pointer; font-family: inherit; transition: all 0.2s; }
   .btn-out:hover { border-color: #e8507a; color: #e8507a; }
+  .btn-out.active { background: #fff0f5; border-color: #e8507a; color: #e8507a; }
 
   .main { max-width: 800px; margin: 0 auto; padding: 28px 24px; }
 
   /* TOOLBAR */
   .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-  .btn-new {
-    background: #e8507a; color: #fff; border: none; border-radius: 10px; padding: 9px 18px;
-    font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit;
-    display: flex; align-items: center; gap: 6px; transition: background 0.2s;
-  }
+  .btn-new { background: #e8507a; color: #fff; border: none; border-radius: 10px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; transition: background 0.2s; }
   .btn-new:hover { background: #d63f6a; }
-  .btn-save-bar {
-    background: #fff; color: #e8507a; border: 1.5px solid #e8507a; border-radius: 10px;
-    padding: 8px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit;
-    display: flex; align-items: center; gap: 6px; transition: all 0.2s;
-  }
+  .btn-save-bar { background: #fff; color: #e8507a; border: 1.5px solid #e8507a; border-radius: 10px; padding: 8px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
   .btn-save-bar:hover { background: #fff0f5; }
+  .btn-save-bar.active { background: #e8507a !important; color: #fff !important; }
   .btn-save-bar:disabled { opacity: 0.35; cursor: not-allowed; }
-  .unsaved-badge {
-    background: #fff0f5; border: 1px solid #fcd0dd; border-radius: 20px;
-    padding: 3px 10px; font-size: 11px; color: #e8507a; margin-left: auto; display: none;
-  }
+  .unsaved-badge { background: #fff0f5; border: 1px solid #fcd0dd; border-radius: 20px; padding: 3px 10px; font-size: 11px; color: #e8507a; margin-left: auto; display: none; }
 
-  /* FILE LIST (Drive style) */
-  .list-header {
-    display: grid; grid-template-columns: 40px 1fr 120px 80px;
-    padding: 8px 12px; font-size: 11px; color: #aaa; font-weight: 500;
-    text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #fcd0dd;
-    margin-bottom: 4px;
-  }
-  .file-row {
-    display: grid; grid-template-columns: 40px 1fr 120px 80px;
-    align-items: center; padding: 10px 12px; border-radius: 10px;
-    transition: background 0.15s; cursor: default; animation: fadeIn 0.2s ease;
-  }
+  /* CATEGORY STYLES */
+  .cat-container { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px dashed #fcd0dd; }
+  .sub-cat-wrap { display: none; gap: 8px; margin-top: 12px; padding-left: 12px; border-left: 2px solid #fcd0dd; animation: fadeIn 0.3s ease; }
+
+  /* FILE LIST */
+  .list-header { display: grid; grid-template-columns: 40px 1fr 120px 80px; padding: 8px 12px; font-size: 11px; color: #aaa; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #fcd0dd; margin-bottom: 4px; }
+  .file-row { display: grid; grid-template-columns: 40px 1fr 120px 80px; align-items: center; padding: 10px 12px; border-radius: 10px; transition: background 0.15s; cursor: default; animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
   .file-row:hover { background: #fff0f5; }
-  .file-thumb {
-    width: 32px; height: 32px; border-radius: 6px; object-fit: cover;
-    border: 1px solid #fcd0dd; background: #fff0f5;
-    display: flex; align-items: center; justify-content: center; font-size: 14px; overflow: hidden;
-  }
+  .file-thumb { width: 32px; height: 32px; border-radius: 6px; object-fit: cover; border: 1px solid #fcd0dd; background: #fff0f5; display: flex; align-items: center; justify-content: center; font-size: 14px; overflow: hidden; }
   .file-thumb img { width:100%; height:100%; object-fit:cover; border-radius:6px; }
   .file-name { font-size: 14px; font-weight: 500; color: #1a1a1a; padding: 0 12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .file-name-sub { font-size: 11px; color: #bbb; margin-top: 1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding: 0 12px; }
   .file-date { font-size: 12px; color: #aaa; }
   .file-actions { display: flex; gap: 6px; justify-content: flex-end; opacity: 0; transition: opacity 0.15s; }
   .file-row:hover .file-actions { opacity: 1; }
-  .act-btn {
-    background: none; border: none; padding: 4px 6px; border-radius: 6px; cursor: pointer;
-    font-size: 13px; color: #bbb; transition: all 0.15s;
-  }
+  .act-btn { background: none; border: none; padding: 4px 6px; border-radius: 6px; cursor: pointer; font-size: 13px; color: #bbb; transition: all 0.15s; }
   .act-btn:hover { background: #fcd0dd; color: #e8507a; }
   .act-btn.del:hover { background: #ffe0e0; color: #e8507a; }
 
-  /* EMPTY */
+  /* EMPTY & MODAL & TOAST */
   .empty { text-align: center; padding: 60px 20px; color: #ccc; }
   .empty-icon { font-size: 40px; margin-bottom: 10px; }
   .empty-text { font-size: 14px; color: #bbb; }
-
-  /* SPINNER */
   .spinner { width: 24px; height: 24px; border: 2px solid #fcd0dd; border-top-color: #e8507a; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 40px auto; }
   @keyframes spin { to{transform:rotate(360deg)} }
-
-  /* MODAL */
   .modal-wrap { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.25); z-index: 100; align-items: center; justify-content: center; }
   .modal-wrap.open { display: flex; }
-  .modal {
-    background: #fff; border-radius: 16px; padding: 28px; width: 420px; max-width: 95vw;
-    box-shadow: 0 8px 40px rgba(220,80,120,0.15); border: 1px solid #fcd0dd;
-    animation: popIn 0.2s ease;
-  }
+  .modal { background: #fff; border-radius: 16px; padding: 28px; width: 420px; max-width: 95vw; box-shadow: 0 8px 40px rgba(220,80,120,0.15); border: 1px solid #fcd0dd; animation: popIn 0.2s ease; }
   @keyframes popIn { from{opacity:0;transform:scale(0.96)} to{opacity:1;transform:scale(1)} }
   .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #1a1a1a; }
   .field-lbl { font-size: 11px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; display: block; }
   .field-wrap { margin-bottom: 12px; }
-  .preview-box {
-    width: 100%; aspect-ratio: 16/9; border-radius: 10px; background: #fff8fa;
-    border: 1.5px dashed #fcd0dd; overflow: hidden; margin-bottom: 12px;
-    display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 13px;
-  }
+  .preview-box { width: 100%; aspect-ratio: 16/9; border-radius: 10px; background: #fff8fa; border: 1.5px dashed #fcd0dd; overflow: hidden; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 13px; }
   .preview-box img { width:100%; height:100%; object-fit:cover; }
   .modal-footer { display: flex; gap: 8px; margin-top: 16px; }
   .btn-cancel { flex:1; background:none; border:1.5px solid #fcd0dd; border-radius:10px; padding:10px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; color:#aaa; transition:all 0.2s; }
   .btn-cancel:hover { border-color:#e8507a; color:#e8507a; }
   .btn-confirm { flex:1; background:#e8507a; color:#fff; border:none; border-radius:10px; padding:10px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:background 0.2s; }
   .btn-confirm:hover { background:#d63f6a; }
-
-  /* TOAST */
   #toast-wrap { position:fixed; bottom:20px; right:20px; z-index:999; display:flex; flex-direction:column; gap:8px; }
   .toast { background:#fff; border:1px solid #fcd0dd; border-left:3px solid #e8507a; border-radius:10px; padding:10px 16px; font-size:13px; color:#1a1a1a; box-shadow:0 2px 12px rgba(220,80,120,0.12); animation:slideIn 0.2s ease; }
-  .toast.ok { border-left-color:#e8507a; }
-  .toast.err { border-left-color:#ff6b6b; }
   @keyframes slideIn { from{opacity:0;transform:translateX(12px)} to{opacity:1;transform:translateX(0)} }
 </style>
 </head>
 <body>
 
-<!-- CONFIG -->
 <script>
 const CONFIG = {
   password:  'AYUU00HOLLY',
@@ -155,7 +99,6 @@ const CONFIG = {
 };
 </script>
 
-<!-- LOGIN -->
 <div id="login">
   <div class="login-card">
     <div class="login-logo">🌸</div>
@@ -167,17 +110,17 @@ const CONFIG = {
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <div class="header">
     <div class="header-brand"><span>🌸</span> Admin Gallery</div>
     <button class="btn-out" id="btn-logout">Keluar</button>
   </div>
+  
   <div class="main">
     <div class="toolbar">
       <button class="btn-new" id="btn-add">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Tambah Foto
+        Tambah Item
       </button>
       <button class="btn-save-bar" id="btn-save" disabled>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
@@ -186,24 +129,36 @@ const CONFIG = {
       <div class="unsaved-badge" id="unsaved-badge">● belum disimpan</div>
     </div>
 
+    <div class="cat-container">
+      <div style="display: flex; gap: 10px;">
+        <button class="btn-save-bar" id="cat-sparkle" onclick="setMainCat('sparkle')">✨ Sparkle</button>
+        <button class="btn-save-bar" id="cat-citlali" onclick="setMainCat('citlali')">🌙 Citlali</button>
+      </div>
+      
+      <div id="sub-cat-wrap" class="sub-cat-wrap">
+        <button class="btn-out" id="type-photo" onclick="setTypeCat('photo')">🖼️ Photo</button>
+        <button class="btn-out" id="type-video" onclick="setTypeCat('video')">🎥 Video</button>
+        <button class="btn-out" id="type-audio" onclick="setTypeCat('audio')">🎵 Audio</button>
+      </div>
+    </div>
+
     <div id="file-list">
-      <div style="text-align:center;padding:40px"><div class="spinner"></div></div>
+      <div class="empty"><div class="empty-icon">👈</div><div class="empty-text">Silakan pilih kategori Sparkle atau Citlali di atas.</div></div>
     </div>
   </div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-wrap" id="modal">
   <div class="modal">
-    <div class="modal-title" id="modal-title">Tambah Foto</div>
+    <div class="modal-title" id="modal-title">Tambah Item</div>
     <div class="preview-box" id="preview"><span>Preview</span></div>
     <div class="field-wrap">
-      <label class="field-lbl">URL Foto</label>
+      <label class="field-lbl">URL Konten</label>
       <input class="inp" id="inp-url" type="url" placeholder="https://...">
     </div>
     <div class="field-wrap">
-      <label class="field-lbl">Caption / Nama Karakter</label>
-      <input class="inp" id="inp-cap" placeholder="contoh: Rem — Re:Zero">
+      <label class="field-lbl">Keterangan / Caption</label>
+      <input class="inp" id="inp-cap" placeholder="Masukkan judul atau caption">
     </div>
     <div class="modal-footer">
       <button class="btn-cancel" id="modal-cancel">Batal</button>
@@ -216,6 +171,8 @@ const CONFIG = {
 
 <script>
 let photos = [], fileSha = '', dirty = false, editId = null;
+let currentMainCat = ''; // sparkle / citlali
+let currentType = '';    // photo / video / audio
 
 function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
 function toast(msg, type='ok') {
@@ -229,6 +186,33 @@ function setDirty(d) {
   document.getElementById('unsaved-badge').style.display = d ? 'block' : 'none';
 }
 
+// NAVIGATION LOGIC
+function setMainCat(cat) {
+  currentMainCat = cat;
+  currentType = ''; 
+  document.getElementById('sub-cat-wrap').style.display = 'flex';
+  
+  // Update UI Tombol Utama
+  document.querySelectorAll('.cat-container .btn-save-bar').forEach(b => {
+    const isThis = b.id === `cat-${cat}`;
+    b.classList.toggle('active', isThis);
+  });
+  
+  // Reset UI Tombol Sub
+  document.querySelectorAll('.sub-cat-wrap .btn-out').forEach(b => b.classList.remove('active'));
+  
+  render();
+}
+
+function setTypeCat(type) {
+  currentType = type;
+  document.querySelectorAll('.sub-cat-wrap .btn-out').forEach(b => {
+    const isThis = b.id === `type-${type}`;
+    b.classList.toggle('active', isThis);
+  });
+  render();
+}
+
 // LOGIN
 document.getElementById('btn-login').addEventListener('click', doLogin);
 document.getElementById('inp-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
@@ -239,29 +223,22 @@ function doLogin() {
     loadGallery();
   } else {
     document.getElementById('login-err').style.display = 'block';
-    document.getElementById('inp-pass').value = '';
-    document.getElementById('inp-pass').focus();
   }
 }
 document.getElementById('btn-logout').addEventListener('click', () => {
-  document.getElementById('login').style.display = 'flex';
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('inp-pass').value = '';
-  photos = []; fileSha = ''; dirty = false;
+  location.reload();
 });
 
-// LOAD
+// LOAD FROM GITHUB
 async function loadGallery() {
-  document.getElementById('file-list').innerHTML = '<div style="text-align:center;padding:40px"><div class="spinner"></div></div>';
+  const list = document.getElementById('file-list');
+  list.innerHTML = '<div style="text-align:center;padding:40px"><div class="spinner"></div></div>';
   try {
     const r = await fetch(`https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.filePath}`, {
       headers: { Authorization: `token ${CONFIG.token}`, Accept: 'application/vnd.github.v3+json' }
     });
     if (r.status === 404) {
       photos = []; fileSha = '';
-      toast('File JSON belum ada — mulai tambah foto!');
-    } else if (!r.ok) {
-      throw new Error(`GitHub error ${r.status}`);
     } else {
       const data = await r.json();
       fileSha = data.sha;
@@ -270,42 +247,44 @@ async function loadGallery() {
     }
     render();
   } catch(e) {
-    document.getElementById('file-list').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-text">${e.message}</div></div>`;
-    toast(e.message, 'err');
+    list.innerHTML = `<div class="empty">⚠️ ${e.message}</div>`;
   }
 }
 
-// RENDER
+// RENDER LIST
 function render() {
   const list = document.getElementById('file-list');
-  setDirty(false);
-  if (!photos.length) {
-    list.innerHTML = '<div class="empty"><div class="empty-icon">📷</div><div class="empty-text">Belum ada foto. Klik Tambah Foto.</div></div>';
+  if (!currentMainCat || !currentType) {
+    list.innerHTML = `<div class="empty"><div class="empty-icon">${!currentMainCat ? '👈' : '👇'}</div><div class="empty-text">${!currentMainCat ? 'Pilih Kategori (Sparkle/Citlali)' : 'Pilih Tipe (Photo/Video/Audio)'}</div></div>`;
     return;
   }
-  list.innerHTML = `
-    <div class="list-header">
-      <div></div><div>Nama</div><div>Tanggal</div><div></div>
-    </div>
-  `;
-  photos.forEach((p, i) => {
+
+  const filtered = photos.filter(p => p.category === currentMainCat && p.type === currentType);
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">📷</div><div class="empty-text">Belum ada konten di kategori ini.</div></div>';
+    return;
+  }
+
+  list.innerHTML = `<div class="list-header"><div></div><div>Nama</div><div>Tanggal</div><div></div></div>`;
+  filtered.forEach((p) => {
     const row = document.createElement('div');
-    row.className = 'file-row'; row.dataset.id = p.id;
+    row.className = 'file-row';
     const date = p.addedAt ? new Date(p.addedAt).toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'}) : '—';
+    const icon = p.type === 'video' ? '🎥' : (p.type === 'audio' ? '🎵' : '🖼️');
+
     row.innerHTML = `
       <div class="file-thumb">
-        ${p.url ? `<img src="${p.url}" onerror="this.parentNode.innerHTML='🖼️'">` : '🖼️'}
+        ${p.url && p.type === 'photo' ? `<img src="${p.url}" onerror="this.parentNode.innerHTML='${icon}'">` : icon}
       </div>
       <div>
-        <div class="file-name">${p.caption || 'Tanpa caption'}</div>
-        <div class="file-name-sub">${p.url || ''}</div>
+        <div class="file-name">${p.caption || 'Tanpa judul'}</div>
+        <div class="file-name-sub">${p.url}</div>
       </div>
       <div class="file-date">${date}</div>
       <div class="file-actions">
-        <button class="act-btn" title="Naik" onclick="mv('${p.id}',-1)">↑</button>
-        <button class="act-btn" title="Turun" onclick="mv('${p.id}',1)">↓</button>
-        <button class="act-btn" title="Edit" onclick="openEdit('${p.id}')">✏️</button>
-        <button class="act-btn del" title="Hapus" onclick="del('${p.id}')">🗑️</button>
+        <button class="act-btn" onclick="openEdit('${p.id}')">✏️</button>
+        <button class="act-btn del" onclick="del('${p.id}')">🗑️</button>
       </div>
     `;
     list.appendChild(row);
@@ -314,72 +293,60 @@ function render() {
 
 // ACTIONS
 function del(id) {
-  if (!confirm('Hapus foto ini?')) return;
+  if (!confirm('Hapus item ini?')) return;
   photos = photos.filter(p => p.id !== id);
-  render(); setDirty(true); toast('Foto dihapus.');
-}
-function mv(id, dir) {
-  const i = photos.findIndex(p => p.id === id), j = i + dir;
-  if (j < 0 || j >= photos.length) return;
-  [photos[i], photos[j]] = [photos[j], photos[i]];
   render(); setDirty(true);
 }
 
-// MODAL
 function openModal(title, url='', cap='', id=null) {
+  if (!currentMainCat || !currentType) { toast('Pilih kategori & tipe dulu!', 'err'); return; }
   editId = id;
   document.getElementById('modal-title').textContent = title;
   document.getElementById('inp-url').value = url;
   document.getElementById('inp-cap').value = cap;
-  document.getElementById('preview').innerHTML = url ? `<img src="${url}">` : '<span>Preview</span>';
-  document.getElementById('modal-ok').textContent = id ? 'Simpan' : 'Tambah';
+  document.getElementById('preview').innerHTML = url && currentType === 'photo' ? `<img src="${url}">` : '<span>Preview</span>';
   document.getElementById('modal').classList.add('open');
-  document.getElementById('inp-url').focus();
 }
+
 function openEdit(id) {
   const p = photos.find(x => x.id === id);
-  openModal('Edit Foto', p.url, p.caption || '', id);
+  openModal('Edit Item', p.url, p.caption, id);
 }
+
 const closeModal = () => { document.getElementById('modal').classList.remove('open'); editId = null; };
-document.getElementById('btn-add').addEventListener('click', () => openModal('Tambah Foto'));
+document.getElementById('btn-add').addEventListener('click', () => openModal('Tambah Item'));
 document.getElementById('modal-cancel').addEventListener('click', closeModal);
-document.getElementById('modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
-document.getElementById('inp-url').addEventListener('input', function() {
-  document.getElementById('preview').innerHTML = this.value
-    ? `<img src="${this.value}" onerror="this.parentNode.innerHTML='<span>URL tidak valid</span>'">`
-    : '<span>Preview</span>';
-});
+
 document.getElementById('modal-ok').addEventListener('click', () => {
   const url = document.getElementById('inp-url').value.trim();
   const cap = document.getElementById('inp-cap').value.trim();
-  if (!url) { toast('URL wajib diisi!', 'err'); return; }
+  if (!url) return toast('URL wajib diisi!', 'err');
+
   if (editId) {
     const p = photos.find(x => x.id === editId);
     p.url = url; p.caption = cap;
-    toast('Foto diupdate.');
   } else {
-    photos.push({ id: genId(), url, caption: cap, addedAt: new Date().toISOString() });
-    toast('Foto ditambahkan!');
+    photos.push({ id: genId(), url, caption: cap, category: currentMainCat, type: currentType, addedAt: new Date().toISOString() });
   }
   render(); setDirty(true); closeModal();
 });
 
-// SAVE
+// SAVE TO GITHUB
 document.getElementById('btn-save').addEventListener('click', async () => {
   const btn = document.getElementById('btn-save');
-  btn.disabled = true; btn.textContent = 'Menyimpan…';
+  btn.disabled = true; btn.textContent = 'Menyimpan...';
   try {
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(photos, null, 2))));
     const r = await fetch(`https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.filePath}`, {
       method: 'PUT',
-      headers: { Authorization: `token ${CONFIG.token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
-      body: JSON.stringify({ message: `Update gallery (${new Date().toLocaleString('id-ID')})`, content, ...(fileSha ? {sha: fileSha} : {}) })
+      headers: { Authorization: `token ${CONFIG.token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `Update gallery`, content, ...(fileSha ? {sha: fileSha} : {}) })
     });
-    if (!r.ok) { const e = await r.json(); throw new Error(e.message); }
-    const data = await r.json();
-    fileSha = data.content.sha;
+    if (!r.ok) throw new Error('Gagal simpan ke GitHub');
+    const res = await r.json();
+    fileSha = res.content.sha;
     setDirty(false);
-    toast(`Tersimpan! ${photos.length} foto.`);
+    toast('Berhasil disimpan!');
   } catch(e) {
     toast(e.message, 'err');
   } finally {
