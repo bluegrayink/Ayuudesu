@@ -170,9 +170,54 @@ const CONFIG = {
 <div id="toast-wrap"></div>
 
 <script>
-let photos = [], fileSha = '', dirty = false, editId = null;
-let currentMainCat = ''; // sparkle / citlali
-let currentType = '';    // photo / video / audio
+// Ganti baris let photos = []; dengan ini:
+let photos = [
+  // --- DATA SPARKLE ---
+  { id: "s1p1", url: "Photo/Sparkle/1.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
+  { id: "s1p2", url: "Photo/Sparkle/2.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
+  { id: "s1p3", url: "Photo/Sparkle/3.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
+  { id: "s1p4", url: "Photo/Sparkle/4.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
+  { id: "s1p5", url: "Photo/Sparkle/5.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
+  { id: "s1p6", url: "Photo/Sparkle/6.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
+  { id: "s1p7", url: "Photo/Sparkle/7.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
+  { id: "s1p8", url: "Photo/Sparkle/8.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
+  { id: "s1v1", url: "assets/vid01.mp4", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "video", addedAt: new Date().toISOString() },
+  { id: "s1a1", url: "Audio/Pelempuan.mp3", caption: "Ayuudesu - Audio", category: "sparkle", type: "audio", addedAt: new Date().toISOString() },
+
+  // --- DATA CITLALI ---
+  { id: "c1p1", url: "Photo/Citlali/IMG_01.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p2", url: "Photo/Citlali/IMG_02.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p3", url: "Photo/Citlali/IMG_03.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p4", url: "Photo/Citlali/IMG_04.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p5", url: "Photo/Citlali/IMG_05.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p6", url: "Photo/Citlali/IMG_06.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p7", url: "Photo/Citlali/IMG_07.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p8", url: "Photo/Citlali/IMG_08.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p9", url: "Photo/Citlali/IMG_09.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p10", url: "Photo/Citlali/IMG_10.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p11", url: "Photo/Citlali/IMG_11.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p12", url: "Photo/Citlali/IMG_12.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p13", url: "Photo/Citlali/IMG_13.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p14", url: "Photo/Citlali/IMG_14.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p15", url: "Photo/Citlali/IMG_15.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p16", url: "Photo/Citlali/IMG_16.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p17", url: "Photo/Citlali/IMG_17.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p18", url: "Photo/Citlali/IMG_18.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p19", url: "Photo/Citlali/IMG_19.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p20", url: "Photo/Citlali/IMG_20.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p21", url: "Photo/Citlali/IMG_21.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p22", url: "Photo/Citlali/IMG_22.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p23", url: "Photo/Citlali/IMG_23.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p24", url: "Photo/Citlali/IMG_24.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
+  { id: "c1p25", url: "Photo/Citlali/IMG_25.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() }, 
+  { id: "c1v1", url: "Video/VID_01.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
+  { id: "c1v2", url: "Video/VID_02.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
+  { id: "c1v3", url: "Video/VID_03.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
+  { id: "c1v4", url: "Video/VID_04.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
+  { id: "c1v5", url: "Video/VID_05.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
+];
+let currentMainCat = ''; 
+let currentType = '';    
 
 function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
 function toast(msg, type='ok') {
