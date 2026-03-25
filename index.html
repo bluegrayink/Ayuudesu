@@ -3,402 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Gallery - Multi Category</title>
+<title>Admin Gallery - Clean Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: 'Inter', sans-serif; background: #fff0f5; min-height: 100vh; color: #1a1a1a; }
 
-  /* LOGIN */
+  /* --- LOGIN --- */
   #login { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-  .login-card { background: #fff; border-radius: 16px; padding: 40px 36px; width: 320px; box-shadow: 0 4px 24px rgba(220,80,120,0.10); border: 1px solid #fcd0dd; }
-  .login-logo { font-size: 28px; margin-bottom: 4px; }
-  .login-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; }
-  .login-sub { font-size: 13px; color: #999; margin-bottom: 24px; }
-  .inp { width: 100%; border: 1.5px solid #fcd0dd; border-radius: 10px; padding: 11px 14px; font-size: 14px; font-family: inherit; outline: none; background: #fff8fa; transition: border-color 0.2s; color: #1a1a1a; }
-  .inp:focus { border-color: #e8507a; }
-  .btn-pink { width: 100%; background: #e8507a; color: #fff; border: none; border-radius: 10px; padding: 12px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 12px; transition: background 0.2s; }
-  .btn-pink:hover { background: #d63f6a; }
-  .err { font-size: 12px; color: #e8507a; margin-top: 8px; display: none; }
+  .login-card { background: #fff; border-radius: 20px; padding: 40px; width: 340px; box-shadow: 0 10px 30px rgba(232,80,122,0.1); border: 1px solid #fcd0dd; text-align: center; }
+  .inp { width: 100%; border: 1.5px solid #fcd0dd; border-radius: 12px; padding: 12px; font-size: 14px; margin-bottom: 15px; outline: none; transition: 0.2s; }
+  .inp:focus { border-color: #e8507a; background: #fff; }
+  .btn-pink { width: 100%; background: #e8507a; color: #fff; border: none; border-radius: 12px; padding: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+  .btn-pink:hover { background: #d63f6a; transform: translateY(-1px); }
 
-  /* APP */
+  /* --- LAYOUT --- */
   #app { display: none; }
-  .header { background: #fff; border-bottom: 1px solid #fcd0dd; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-  .header-brand { font-size: 15px; font-weight: 600; color: #e8507a; display: flex; align-items: center; gap: 8px; }
-  .header-brand span { font-size: 18px; }
-  .btn-out { background: none; border: 1.5px solid #fcd0dd; border-radius: 8px; padding: 5px 14px; font-size: 12px; color: #999; cursor: pointer; font-family: inherit; transition: all 0.2s; }
-  .btn-out:hover { border-color: #e8507a; color: #e8507a; }
-  .btn-out.active { background: #fff0f5; border-color: #e8507a; color: #e8507a; }
+  .header { background: #fff; border-bottom: 1px solid #fcd0dd; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+  .main { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+  
+  /* --- NAVIGATION --- */
+  .nav-group { margin-bottom: 25px; }
+  .btn-nav { background: #fff; border: 1.5px solid #fcd0dd; border-radius: 10px; padding: 8px 16px; font-size: 13px; font-weight: 600; color: #e8507a; cursor: pointer; margin-right: 8px; transition: 0.2s; }
+  .btn-nav.active { background: #e8507a; color: #fff; border-color: #e8507a; }
+  .sub-nav { display: none; margin-top: 15px; padding-left: 15px; border-left: 3px solid #fcd0dd; gap: 8px; }
 
-  .main { max-width: 800px; margin: 0 auto; padding: 28px 24px; }
+  /* --- GRID --- */
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+  .card { background: #fff; border-radius: 15px; overflow: hidden; border: 1px solid #fcd0dd; cursor: pointer; transition: 0.2s; position: relative; }
+  .card:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(232,80,122,0.1); }
+  .card-thumb { width: 100%; aspect-ratio: 1/1; background: #fff8fa; display: flex; align-items: center; justify-content: center; position: relative; }
+  .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .card-title { padding: 10px; font-size: 11px; font-weight: 600; text-align: center; color: #666; }
+  .badge { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.9); padding: 2px 6px; border-radius: 5px; font-size: 9px; font-weight: 800; color: #e8507a; }
 
-  /* TOOLBAR */
-  .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-  .btn-new { background: #e8507a; color: #fff; border: none; border-radius: 10px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; transition: background 0.2s; }
-  .btn-new:hover { background: #d63f6a; }
-  .btn-save-bar { background: #fff; color: #e8507a; border: 1.5px solid #e8507a; border-radius: 10px; padding: 8px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
-  .btn-save-bar:hover { background: #fff0f5; }
-  .btn-save-bar.active { background: #e8507a !important; color: #fff !important; }
-  .btn-save-bar:disabled { opacity: 0.35; cursor: not-allowed; }
-  .unsaved-badge { background: #fff0f5; border: 1px solid #fcd0dd; border-radius: 20px; padding: 3px 10px; font-size: 11px; color: #e8507a; margin-left: auto; display: none; }
-
-  /* CATEGORY STYLES */
-  .cat-container { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px dashed #fcd0dd; }
-  .sub-cat-wrap { display: none; gap: 8px; margin-top: 12px; padding-left: 12px; border-left: 2px solid #fcd0dd; animation: fadeIn 0.3s ease; }
-
-  /* FILE LIST */
-  .list-header { display: grid; grid-template-columns: 40px 1fr 120px 80px; padding: 8px 12px; font-size: 11px; color: #aaa; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #fcd0dd; margin-bottom: 4px; }
-  .file-row { display: grid; grid-template-columns: 40px 1fr 120px 80px; align-items: center; padding: 10px 12px; border-radius: 10px; transition: background 0.15s; cursor: default; animation: fadeIn 0.2s ease; }
-  @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
-  .file-row:hover { background: #fff0f5; }
-  .file-thumb { width: 32px; height: 32px; border-radius: 6px; object-fit: cover; border: 1px solid #fcd0dd; background: #fff0f5; display: flex; align-items: center; justify-content: center; font-size: 14px; overflow: hidden; }
-  .file-thumb img { width:100%; height:100%; object-fit:cover; border-radius:6px; }
-  .file-name { font-size: 14px; font-weight: 500; color: #1a1a1a; padding: 0 12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .file-name-sub { font-size: 11px; color: #bbb; margin-top: 1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding: 0 12px; }
-  .file-date { font-size: 12px; color: #aaa; }
-  .file-actions { display: flex; gap: 6px; justify-content: flex-end; opacity: 0; transition: opacity 0.15s; }
-  .file-row:hover .file-actions { opacity: 1; }
-  .act-btn { background: none; border: none; padding: 4px 6px; border-radius: 6px; cursor: pointer; font-size: 13px; color: #bbb; transition: all 0.15s; }
-  .act-btn:hover { background: #fcd0dd; color: #e8507a; }
-  .act-btn.del:hover { background: #ffe0e0; color: #e8507a; }
-
-  /* EMPTY & MODAL & TOAST */
-  .empty { text-align: center; padding: 60px 20px; color: #ccc; }
-  .empty-icon { font-size: 40px; margin-bottom: 10px; }
-  .empty-text { font-size: 14px; color: #bbb; }
-  .spinner { width: 24px; height: 24px; border: 2px solid #fcd0dd; border-top-color: #e8507a; border-radius: 50%; animation: spin 0.7s linear infinite; margin: 40px auto; }
-  @keyframes spin { to{transform:rotate(360deg)} }
-  .modal-wrap { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.25); z-index: 100; align-items: center; justify-content: center; }
-  .modal-wrap.open { display: flex; }
-  .modal { background: #fff; border-radius: 16px; padding: 28px; width: 420px; max-width: 95vw; box-shadow: 0 8px 40px rgba(220,80,120,0.15); border: 1px solid #fcd0dd; animation: popIn 0.2s ease; }
-  @keyframes popIn { from{opacity:0;transform:scale(0.96)} to{opacity:1;transform:scale(1)} }
-  .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #1a1a1a; }
-  .field-lbl { font-size: 11px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; display: block; }
-  .field-wrap { margin-bottom: 12px; }
-  .preview-box { width: 100%; aspect-ratio: 16/9; border-radius: 10px; background: #fff8fa; border: 1.5px dashed #fcd0dd; overflow: hidden; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 13px; }
-  .preview-box img { width:100%; height:100%; object-fit:cover; }
-  .modal-footer { display: flex; gap: 8px; margin-top: 16px; }
-  .btn-cancel { flex:1; background:none; border:1.5px solid #fcd0dd; border-radius:10px; padding:10px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; color:#aaa; transition:all 0.2s; }
-  .btn-cancel:hover { border-color:#e8507a; color:#e8507a; }
-  .btn-confirm { flex:1; background:#e8507a; color:#fff; border:none; border-radius:10px; padding:10px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:background 0.2s; }
-  .btn-confirm:hover { background:#d63f6a; }
-  #toast-wrap { position:fixed; bottom:20px; right:20px; z-index:999; display:flex; flex-direction:column; gap:8px; }
-  .toast { background:#fff; border:1px solid #fcd0dd; border-left:3px solid #e8507a; border-radius:10px; padding:10px 16px; font-size:13px; color:#1a1a1a; box-shadow:0 2px 12px rgba(220,80,120,0.12); animation:slideIn 0.2s ease; }
-  @keyframes slideIn { from{opacity:0;transform:translateX(12px)} to{opacity:1;transform:translateX(0)} }
+  /* --- MODAL --- */
+  .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+  .modal.open { display: flex; }
+  .modal-box { background: #fff; border-radius: 20px; width: 100%; max-width: 800px; overflow: hidden; position: relative; }
+  .media-viewer { width: 100%; background: #000; display: flex; align-items: center; justify-content: center; min-height: 300px; }
+  .media-viewer img, .media-viewer video { max-width: 100%; max-height: 70vh; }
+  .modal-info { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .btn-close { position: absolute; top: 15px; right: 15px; background: #fff; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; z-index: 110; }
 </style>
 </head>
 <body>
 
-<script>
-const CONFIG = {
-  password:  'AYUU00HOLLY',
-  token:     'ghp_xxxxxxxxxxxx',
-  owner:     'username',
-  repo:      'nama-repo',
-  filePath:  'data/gallery.json'
-};
-</script>
-
 <div id="login">
   <div class="login-card">
-    <div class="login-logo">🌸</div>
-    <div class="login-title">Admin Gallery</div>
-    <div class="login-sub">Masukkan password untuk lanjut</div>
-    <input class="inp" id="inp-pass" type="password" placeholder="Password" autofocus>
-    <button class="btn-pink" id="btn-login">Masuk</button>
-    <div class="err" id="login-err">Password salah.</div>
+    <div style="font-size: 40px; margin-bottom: 10px;">🌸</div>
+    <h3>Ayuudesu Admin</h3>
+    <p style="font-size: 12px; color: #999; margin-bottom: 20px;">Silakan login untuk kelola gallery</p>
+    <input class="inp" id="pass" type="password" placeholder="Password" autofocus>
+    <button class="btn-pink" onclick="login()">Login</button>
   </div>
 </div>
 
 <div id="app">
   <div class="header">
-    <div class="header-brand"><span>🌸</span> Admin Gallery</div>
-    <button class="btn-out" id="btn-logout">Keluar</button>
+    <div style="color: #e8507a; font-weight: 700;">🌸 DASHBOARD</div>
+    <button class="btn-nav" onclick="location.reload()">Logout</button>
   </div>
-  
+
   <div class="main">
-    <div class="toolbar">
-      <button class="btn-new" id="btn-add">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Tambah Item
-      </button>
-      <button class="btn-save-bar" id="btn-save" disabled>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
-        Simpan
-      </button>
-      <div class="unsaved-badge" id="unsaved-badge">● belum disimpan</div>
-    </div>
-
-    <div class="cat-container">
-      <div style="display: flex; gap: 10px;">
-        <button class="btn-save-bar" id="cat-sparkle" onclick="setMainCat('sparkle')">✨ Sparkle</button>
-        <button class="btn-save-bar" id="cat-citlali" onclick="setMainCat('citlali')">🌙 Citlali</button>
-      </div>
+    <div class="nav-group">
+      <button class="btn-nav" id="btn-sparkle" onclick="setCat('sparkle')">✨ Sparkle</button>
+      <button class="btn-nav" id="btn-citlali" onclick="setCat('citlali')">🌙 Citlali</button>
       
-      <div id="sub-cat-wrap" class="sub-cat-wrap">
-        <button class="btn-out" id="type-photo" onclick="setTypeCat('photo')">🖼️ Photo</button>
-        <button class="btn-out" id="type-video" onclick="setTypeCat('video')">🎥 Video</button>
-        <button class="btn-out" id="type-audio" onclick="setTypeCat('audio')">🎵 Audio</button>
+      <div id="sub-nav" class="sub-nav">
+        <button class="btn-nav" id="type-photo" onclick="setType('photo')">Photo</button>
+        <button class="btn-nav" id="type-video" onclick="setType('video')">Video</button>
+        <button class="btn-nav" id="type-audio" onclick="setType('audio')">Audio</button>
       </div>
     </div>
 
-    <div id="file-list">
-      <div class="empty"><div class="empty-icon">👈</div><div class="empty-text">Silakan pilih kategori Sparkle atau Citlali di atas.</div></div>
-    </div>
+    <div id="grid" class="gallery-grid"></div>
   </div>
 </div>
 
-<div class="modal-wrap" id="modal">
-  <div class="modal">
-    <div class="modal-title" id="modal-title">Tambah Item</div>
-    <div class="preview-box" id="preview"><span>Preview</span></div>
-    <div class="field-wrap">
-      <label class="field-lbl">URL Konten</label>
-      <input class="inp" id="inp-url" type="url" placeholder="https://...">
-    </div>
-    <div class="field-wrap">
-      <label class="field-lbl">Keterangan / Caption</label>
-      <input class="inp" id="inp-cap" placeholder="Masukkan judul atau caption">
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" id="modal-cancel">Batal</button>
-      <button class="btn-confirm" id="modal-ok">Tambah</button>
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="btn-close" onclick="closeModal()">✕</button>
+    <div id="viewer" class="media-viewer"></div>
+    <div class="modal-info">
+      <div>
+        <h4 id="m-title"></h4>
+        <small id="m-meta" style="color: #999"></small>
+      </div>
+      <button class="btn-nav" style="color: red; border-color: #ffccd5" onclick="deleteItem()">Hapus</button>
     </div>
   </div>
 </div>
-
-<div id="toast-wrap"></div>
 
 <script>
-// Ganti baris let photos = []; dengan ini:
-let photos = [
-  // --- DATA SPARKLE ---
-  { id: "s1p1", url: "Photo/Sparkle/1.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
-  { id: "s1p2", url: "Photo/Sparkle/2.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
-  { id: "s1p3", url: "Photo/Sparkle/3.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
-  { id: "s1p4", url: "Photo/Sparkle/4.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
-  { id: "s1p5", url: "Photo/Sparkle/5.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
-  { id: "s1p6", url: "Photo/Sparkle/6.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
-  { id: "s1p7", url: "Photo/Sparkle/7.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
-  { id: "s1p8", url: "Photo/Sparkle/8.JPG", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "photo", addedAt: new Date().toISOString() },
-  { id: "s1v1", url: "assets/vid01.mp4", caption: "Ayuudesu - Sparkle", category: "sparkle", type: "video", addedAt: new Date().toISOString() },
-  { id: "s1a1", url: "Audio/Pelempuan.mp3", caption: "Ayuudesu - Audio", category: "sparkle", type: "audio", addedAt: new Date().toISOString() },
+let photos = [];
+let curCat = '', curType = '', selectedId = null;
 
-  // --- DATA CITLALI ---
-  { id: "c1p1", url: "Photo/Citlali/IMG_01.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p2", url: "Photo/Citlali/IMG_02.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p3", url: "Photo/Citlali/IMG_03.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p4", url: "Photo/Citlali/IMG_04.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p5", url: "Photo/Citlali/IMG_05.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p6", url: "Photo/Citlali/IMG_06.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p7", url: "Photo/Citlali/IMG_07.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p8", url: "Photo/Citlali/IMG_08.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p9", url: "Photo/Citlali/IMG_09.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p10", url: "Photo/Citlali/IMG_10.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p11", url: "Photo/Citlali/IMG_11.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p12", url: "Photo/Citlali/IMG_12.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p13", url: "Photo/Citlali/IMG_13.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p14", url: "Photo/Citlali/IMG_14.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p15", url: "Photo/Citlali/IMG_15.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p16", url: "Photo/Citlali/IMG_16.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p17", url: "Photo/Citlali/IMG_17.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p18", url: "Photo/Citlali/IMG_18.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p19", url: "Photo/Citlali/IMG_19.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p20", url: "Photo/Citlali/IMG_20.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p21", url: "Photo/Citlali/IMG_21.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p22", url: "Photo/Citlali/IMG_22.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p23", url: "Photo/Citlali/IMG_23.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p24", url: "Photo/Citlali/IMG_24.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() },
-  { id: "c1p25", url: "Photo/Citlali/IMG_25.JPG", caption: "Ayuudesu - Citlali", category: "citlali", type: "photo", addedAt: new Date().toISOString() }, 
-  { id: "c1v1", url: "Video/VID_01.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
-  { id: "c1v2", url: "Video/VID_02.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
-  { id: "c1v3", url: "Video/VID_03.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
-  { id: "c1v4", url: "Video/VID_04.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
-  { id: "c1v5", url: "Video/VID_05.MOV", caption: "Ayuudesu - Citlali", category: "citlali", type: "video", addedAt: new Date().toISOString() },
-];
-let currentMainCat = ''; 
-let currentType = '';    
-
-function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
-function toast(msg, type='ok') {
-  const el = Object.assign(document.createElement('div'), { className:`toast ${type}`, textContent: msg });
-  document.getElementById('toast-wrap').appendChild(el);
-  setTimeout(() => el.remove(), 3200);
-}
-function setDirty(d) {
-  dirty = d;
-  document.getElementById('btn-save').disabled = !d;
-  document.getElementById('unsaved-badge').style.display = d ? 'block' : 'none';
-}
-
-// NAVIGATION LOGIC
-function setMainCat(cat) {
-  currentMainCat = cat;
-  currentType = ''; 
-  document.getElementById('sub-cat-wrap').style.display = 'flex';
+// --- GENERATOR DATA OTOMATIS (Agar Code Rapi) ---
+function initData() {
+  const data = [];
   
-  // Update UI Tombol Utama
-  document.querySelectorAll('.cat-container .btn-save-bar').forEach(b => {
-    const isThis = b.id === `cat-${cat}`;
-    b.classList.toggle('active', isThis);
-  });
-  
-  // Reset UI Tombol Sub
-  document.querySelectorAll('.sub-cat-wrap .btn-out').forEach(b => b.classList.remove('active'));
-  
-  render();
+  // Sparkle Photos (1-8)
+  for(let i=1; i<=8; i++) {
+    data.push({ id: `s-p-${i}`, url: `Photo/Sparkle/${i}.JPG`, caption: `Sparkle Photo ${i}`, category: 'sparkle', type: 'photo' });
+  }
+  // Sparkle Video & Audio
+  data.push({ id: `s-v-1`, url: `assets/vid01.mp4`, caption: `Sparkle Video`, category: 'sparkle', type: 'video' });
+  data.push({ id: `s-a-1`, url: `Audio/Pelempuan.mp3`, caption: `Sparkle Audio`, category: 'sparkle', type: 'audio' });
+
+  // Citlali Photos (1-25)
+  for(let i=1; i<=25; i++) {
+    const num = i < 10 ? `0${i}` : i;
+    data.push({ id: `c-p-${i}`, url: `Photo/Citlali/IMG_${num}.JPG`, caption: `Citlali Photo ${i}`, category: 'citlali', type: 'photo' });
+  }
+  // Citlali Videos (1-5)
+  for(let i=1; i<=5; i++) {
+    data.push({ id: `c-v-${i}`, url: `Video/VID_0${i}.MOV`, caption: `Citlali Video ${i}`, category: 'citlali', type: 'video' });
+  }
+
+  photos = data.map(item => ({ ...item, addedAt: new Date().toISOString() }));
 }
 
-function setTypeCat(type) {
-  currentType = type;
-  document.querySelectorAll('.sub-cat-wrap .btn-out').forEach(b => {
-    const isThis = b.id === `type-${type}`;
-    b.classList.toggle('active', isThis);
-  });
-  render();
-}
-
-// LOGIN
-document.getElementById('btn-login').addEventListener('click', doLogin);
-document.getElementById('inp-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-function doLogin() {
-  if (document.getElementById('inp-pass').value === CONFIG.password) {
+// --- APP LOGIC ---
+function login() {
+  if(document.getElementById('pass').value === 'AYUU00holly') {
     document.getElementById('login').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    loadGallery();
-  } else {
-    document.getElementById('login-err').style.display = 'block';
-  }
-}
-document.getElementById('btn-logout').addEventListener('click', () => {
-  location.reload();
-});
-
-// LOAD FROM GITHUB
-async function loadGallery() {
-  const list = document.getElementById('file-list');
-  list.innerHTML = '<div style="text-align:center;padding:40px"><div class="spinner"></div></div>';
-  try {
-    const r = await fetch(`https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.filePath}`, {
-      headers: { Authorization: `token ${CONFIG.token}`, Accept: 'application/vnd.github.v3+json' }
-    });
-    if (r.status === 404) {
-      photos = []; fileSha = '';
-    } else {
-      const data = await r.json();
-      fileSha = data.sha;
-      const parsed = JSON.parse(atob(data.content.replace(/\n/g,'')));
-      photos = Array.isArray(parsed) ? parsed : (parsed.photos || []);
-    }
-    render();
-  } catch(e) {
-    list.innerHTML = `<div class="empty">⚠️ ${e.message}</div>`;
-  }
+    initData();
+  } else alert('Salah password!');
 }
 
-// RENDER LIST
+function setCat(c) {
+  curCat = c; curType = '';
+  document.getElementById('sub-nav').style.display = 'flex';
+  document.querySelectorAll('#btn-sparkle, #btn-citlali').forEach(b => b.classList.toggle('active', b.id === `btn-${c}`));
+  render();
+}
+
+function setType(t) {
+  curType = t;
+  document.querySelectorAll('[id^="type-"]').forEach(b => b.classList.toggle('active', b.id === `type-${t}`));
+  render();
+}
+
 function render() {
-  const list = document.getElementById('file-list');
-  if (!currentMainCat || !currentType) {
-    list.innerHTML = `<div class="empty"><div class="empty-icon">${!currentMainCat ? '👈' : '👇'}</div><div class="empty-text">${!currentMainCat ? 'Pilih Kategori (Sparkle/Citlali)' : 'Pilih Tipe (Photo/Video/Audio)'}</div></div>`;
-    return;
-  }
-
-  const filtered = photos.filter(p => p.category === currentMainCat && p.type === currentType);
-
-  if (!filtered.length) {
-    list.innerHTML = '<div class="empty"><div class="empty-icon">📷</div><div class="empty-text">Belum ada konten di kategori ini.</div></div>';
-    return;
-  }
-
-  list.innerHTML = `<div class="list-header"><div></div><div>Nama</div><div>Tanggal</div><div></div></div>`;
-  filtered.forEach((p) => {
-    const row = document.createElement('div');
-    row.className = 'file-row';
-    const date = p.addedAt ? new Date(p.addedAt).toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'}) : '—';
-    const icon = p.type === 'video' ? '🎥' : (p.type === 'audio' ? '🎵' : '🖼️');
-
-    row.innerHTML = `
-      <div class="file-thumb">
-        ${p.url && p.type === 'photo' ? `<img src="${p.url}" onerror="this.parentNode.innerHTML='${icon}'">` : icon}
+  const grid = document.getElementById('grid');
+  const filtered = photos.filter(p => p.category === curCat && p.type === curType);
+  
+  if(!curType) { grid.innerHTML = 'Pilih tipe konten.'; return; }
+  
+  grid.innerHTML = filtered.map(p => `
+    <div class="card" onclick="openModal('${p.id}')">
+      <div class="card-thumb">
+        ${p.type === 'photo' ? `<img src="${p.url}">` : `<span style="font-size:30px">${p.type==='video'?'🎥':'🎵'}</span>`}
+        <div class="badge">${p.type.toUpperCase()}</div>
       </div>
-      <div>
-        <div class="file-name">${p.caption || 'Tanpa judul'}</div>
-        <div class="file-name-sub">${p.url}</div>
-      </div>
-      <div class="file-date">${date}</div>
-      <div class="file-actions">
-        <button class="act-btn" onclick="openEdit('${p.id}')">✏️</button>
-        <button class="act-btn del" onclick="del('${p.id}')">🗑️</button>
-      </div>
-    `;
-    list.appendChild(row);
-  });
+      <div class="card-title">${p.caption}</div>
+    </div>
+  `).join('') || 'Belum ada data.';
 }
 
-// ACTIONS
-function del(id) {
-  if (!confirm('Hapus item ini?')) return;
-  photos = photos.filter(p => p.id !== id);
-  render(); setDirty(true);
-}
-
-function openModal(title, url='', cap='', id=null) {
-  if (!currentMainCat || !currentType) { toast('Pilih kategori & tipe dulu!', 'err'); return; }
-  editId = id;
-  document.getElementById('modal-title').textContent = title;
-  document.getElementById('inp-url').value = url;
-  document.getElementById('inp-cap').value = cap;
-  document.getElementById('preview').innerHTML = url && currentType === 'photo' ? `<img src="${url}">` : '<span>Preview</span>';
+function openModal(id) {
+  selectedId = id;
+  const item = photos.find(p => p.id === id);
+  const viewer = document.getElementById('viewer');
+  document.getElementById('m-title').textContent = item.caption;
+  document.getElementById('m-meta').textContent = `${item.category.toUpperCase()} • ${item.type.toUpperCase()}`;
+  
+  if(item.type === 'photo') viewer.innerHTML = `<img src="${item.url}">`;
+  else if(item.type === 'video') viewer.innerHTML = `<video src="${item.url}" controls autoplay></video>`;
+  else viewer.innerHTML = `<audio src="${item.url}" controls autoplay></audio>`;
+  
   document.getElementById('modal').classList.add('open');
 }
 
-function openEdit(id) {
-  const p = photos.find(x => x.id === id);
-  openModal('Edit Item', p.url, p.caption, id);
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.getElementById('viewer').innerHTML = '';
 }
 
-const closeModal = () => { document.getElementById('modal').classList.remove('open'); editId = null; };
-document.getElementById('btn-add').addEventListener('click', () => openModal('Tambah Item'));
-document.getElementById('modal-cancel').addEventListener('click', closeModal);
-
-document.getElementById('modal-ok').addEventListener('click', () => {
-  const url = document.getElementById('inp-url').value.trim();
-  const cap = document.getElementById('inp-cap').value.trim();
-  if (!url) return toast('URL wajib diisi!', 'err');
-
-  if (editId) {
-    const p = photos.find(x => x.id === editId);
-    p.url = url; p.caption = cap;
-  } else {
-    photos.push({ id: genId(), url, caption: cap, category: currentMainCat, type: currentType, addedAt: new Date().toISOString() });
+function deleteItem() {
+  if(confirm('Hapus item ini?')) {
+    photos = photos.filter(p => p.id !== selectedId);
+    closeModal(); render();
   }
-  render(); setDirty(true); closeModal();
-});
-
-// SAVE TO GITHUB
-document.getElementById('btn-save').addEventListener('click', async () => {
-  const btn = document.getElementById('btn-save');
-  btn.disabled = true; btn.textContent = 'Menyimpan...';
-  try {
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(photos, null, 2))));
-    const r = await fetch(`https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.filePath}`, {
-      method: 'PUT',
-      headers: { Authorization: `token ${CONFIG.token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: `Update gallery`, content, ...(fileSha ? {sha: fileSha} : {}) })
-    });
-    if (!r.ok) throw new Error('Gagal simpan ke GitHub');
-    const res = await r.json();
-    fileSha = res.content.sha;
-    setDirty(false);
-    toast('Berhasil disimpan!');
-  } catch(e) {
-    toast(e.message, 'err');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg> Simpan`;
-  }
-});
+}
 </script>
 </body>
 </html>
