@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Gallery - Ultra Light</title>
+<title>Admin Gallery - Ultra Clean</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
-  body { font-family: 'Inter', sans-serif; background: #fff; color: #333; line-height: 1.5; }
+  body { font-family: 'Inter', sans-serif; background: #fff; color: #1a1a1a; }
 
   /* --- LOGIN --- */
   #login { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #fdf2f5; }
@@ -26,14 +26,12 @@
   .btn-nav.active { background: #e91e63; color: #fff; }
   .sub-nav { display: none; margin-top: 10px; gap: 5px; overflow-x: auto; padding-bottom: 5px; }
 
-  /* --- LIST VIEW (MODERN & SIMPLE) --- */
+  /* --- LIST VIEW (NO ICON, NO CAPTION) --- */
   .file-list { border-top: 1px solid #f5f5f5; }
-  .file-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f5f5f5; cursor: pointer; }
+  .file-item { display: flex; align-items: center; justify-content: space-between; padding: 18px 5px; border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: background 0.2s; }
   .file-item:active { background: #fafafa; }
-  .file-info { display: flex; align-items: center; gap: 15px; }
-  .file-icon { width: 40px; height: 40px; background: #fff0f5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #e91e63; }
-  .file-name { font-size: 14px; font-weight: 500; display: block; }
-  .file-meta { font-size: 11px; color: #999; }
+  .file-name { font-size: 14px; font-weight: 400; color: #333; }
+  .arrow { color: #ddd; font-size: 16px; font-weight: 200; }
 
   /* --- MODAL PREVIEW --- */
   .modal-overlay { 
@@ -43,7 +41,6 @@
   }
   .modal-overlay.open { display: flex; }
   
-  /* Tombol X (Tetap di pojok kanan atas layar) */
   .close-btn { 
     position: fixed; top: 20px; right: 20px; 
     background: #fff; border: none; width: 36px; height: 36px; 
@@ -57,7 +54,7 @@
     margin: 20px; z-index: 110;
   }
   .viewer { background: #000; width: 100%; display: flex; align-items: center; justify-content: center; min-height: 200px; }
-  .viewer img, .viewer video { max-width: 100%; max-height: 60vh; }
+  .viewer img, .viewer video { max-width: 100%; max-height: 65vh; display: block; }
   
   .actions { padding: 20px; border-top: 1px solid #eee; }
   .dl-link { display: block; width: 100%; background: #00c853; color: #fff; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 600; margin-bottom: 10px; font-size: 14px; }
@@ -77,7 +74,7 @@
 
 <div id="app">
   <div class="header">
-    <span style="font-weight: 700; color:#e91e63">Ayuu Panel</span>
+    <span style="font-weight: 700; color:#e91e63">Ayuudesu - Admin Page</span>
     <button class="btn-nav" style="margin:0" onclick="location.reload()">Exit</button>
   </div>
 
@@ -89,7 +86,7 @@
       <div id="sub-nav" class="sub-nav">
         <button class="btn-nav" id="type-photo" onclick="setType('photo')">Photo</button>
         <button class="btn-nav" id="type-video" onclick="setType('video')">Video</button>
-        <button class="btn-nav" id="type-audio" onclick="setType('audio')">Audio</button>
+        <button class="btn-nav" id="type-audio" onclick="setType('audio') )">Audio</button>
       </div>
     </div>
 
@@ -103,11 +100,11 @@
     <div id="viewer" class="viewer"></div>
     <div class="actions">
       <div style="margin-bottom:15px">
-        <h4 id="m-title" style="font-size:15px"></h4>
-        <p id="m-meta" style="font-size:12px; color:#999"></p>
+        <h4 id="m-title" style="font-size:14px; font-weight: 600;"></h4>
+        <p id="m-meta" style="font-size:11px; color:#999; margin-top: 2px;"></p>
       </div>
       <a href="#" id="dl-link" class="dl-link" download>Download File</a>
-      <button class="del-btn" onclick="deleteItem()">Delete Item</button>
+      <button class="del-btn" onclick="deleteItem()">Delete from List</button>
     </div>
   </div>
 </div>
@@ -119,18 +116,23 @@ let curCat = '', curType = '', selectedId = null;
 function initData() {
   const data = [];
   // Sparkle
-  for(let i=1; i<=8; i++) data.push({ id:`s-p-${i}`, url:`Photo/Sparkle/${i}.JPG`, caption:`Sparkle Photo ${i}`, category:'sparkle', type:'photo' });
-  data.push({ id:`s-v-1`, url:`Video/vid01.mp4`, caption:`Sparkle Video`, category:'sparkle', type:'video' });
-  data.push({ id:`s-a-1`, url:`Audio/Pelempuan.mp3`, caption:`Sparkle Audio`, category:'sparkle', type:'audio' });
+  for(let i=1; i<=8; i++) data.push({ id:`s-p-${i}`, url:`Photo/Sparkle/${i}.JPG`, category:'sparkle', type:'photo' });
+  data.push({ id:`s-v-1`, url:`Video/vid01.mp4`, category:'sparkle', type:'video' });
+  data.push({ id:`s-a-1`, url:`Audio/Pelempuan.mp3`, category:'sparkle', type:'audio' });
 
   // Citlali
   for(let i=1; i<=25; i++) {
     const num = i < 10 ? `0${i}` : i;
-    data.push({ id:`c-p-${i}`, url:`Photo/Citlali/IMG_${num}.JPG`, caption:`Citlali Photo ${i}`, category:'citlali', type:'photo' });
+    data.push({ id:`c-p-${i}`, url:`Photo/Citlali/IMG_${num}.JPG`, category:'citlali', type:'photo' });
   }
-  for(let i=1; i<=5; i++) data.push({ id:`c-v-${i}`, url:`Video/VID_0${i}.MOV`, caption:`Citlali Video ${i}`, category:'citlali', type:'video' });
+  for(let i=1; i<=5; i++) data.push({ id:`c-v-${i}`, url:`Video/VID_0${i}.MOV`, category:'citlali', type:'video' });
 
-  photos = data.map(item => ({ ...item, addedAt: new Date().toISOString() }));
+  // Gunakan nama file sebagai label default
+  photos = data.map(item => ({ 
+    ...item, 
+    label: item.url.split('/').pop(),
+    addedAt: new Date().toISOString() 
+  }));
 }
 
 function login() {
@@ -156,30 +158,23 @@ function setType(t) {
 
 function render() {
   const container = document.getElementById('file-list');
-  if(!curType) { container.innerHTML = '<p style="text-align:center; color:#ccc; padding:40px">Select Type</p>'; return; }
+  if(!curType) { container.innerHTML = '<p style="text-align:center; color:#ccc; padding:40px; font-size:13px;">Select Type</p>'; return; }
   
   const filtered = photos.filter(p => p.category === curCat && p.type === curType);
-  const icons = { photo: '🖼️', video: '🎥', audio: '🎵' };
 
   container.innerHTML = filtered.map(p => `
     <div class="file-item" onclick="openModal('${p.id}')">
-      <div class="file-info">
-        <div class="file-icon">${icons[p.type]}</div>
-        <div>
-          <span class="file-name">${p.caption}</span>
-          <span class="file-meta">${p.url.split('/').pop()}</span>
-        </div>
-      </div>
-      <div style="color:#eee">›</div>
+      <span class="file-name">${p.label}</span>
+      <span class="arrow">›</span>
     </div>
-  `).join('') || '<p style="text-align:center; color:#ccc; padding:40px">Empty</p>';
+  `).join('') || '<p style="text-align:center; color:#ccc; padding:40px; font-size:13px;">Empty</p>';
 }
 
 function openModal(id) {
   selectedId = id;
   const item = photos.find(p => p.id === id);
   const v = document.getElementById('viewer');
-  document.getElementById('m-title').textContent = item.caption;
+  document.getElementById('m-title').textContent = item.label;
   document.getElementById('m-meta').textContent = item.url;
   document.getElementById('dl-link').href = item.url;
 
@@ -195,13 +190,12 @@ function closeModal() {
   document.getElementById('viewer').innerHTML = '';
 }
 
-// Fitur klik di luar kotak untuk menutup
 function handleOutsideClick(e) {
   if (e.target.id === 'modal') closeModal();
 }
 
 function deleteItem() {
-  if(confirm('Delete this item?')) {
+  if(confirm('Delete this from list?')) {
     photos = photos.filter(p => p.id !== selectedId);
     closeModal(); render();
   }
